@@ -13,7 +13,6 @@ public class DiceManager : MonoBehaviour
     public string Modificador = "0";
 
     public Image RollBtnImage;
-    public Image ResultImage;
     public TMP_Text ResultTotalText;
     public TMP_Text ResultDicesText;
 
@@ -24,6 +23,10 @@ public class DiceManager : MonoBehaviour
     {
         ResultTotalText.text = "";
         ResultDicesText.text = "";
+
+        DiceNum = "0";
+        DiceBonif = "0";
+        Modificador = "0";
     }
 
     private void Update()
@@ -37,9 +40,9 @@ public class DiceManager : MonoBehaviour
         if (DiceBonif == null) return;
         if (Modificador == null) return;
 
-        if (DiceNum == "")
+        if (DiceNum == "" || DiceNum == "0" || DiceBonif == "" || Modificador == "")
         {
-            RollBtnImage.color = new Color(RollBtnImage.color.r, RollBtnImage.color.g, RollBtnImage.color.b, 0.5f);
+            RollBtnImage.color = new Color(RollBtnImage.color.r, RollBtnImage.color.g, RollBtnImage.color.b, 0f);
             CanRoll = false;
         }
         else
@@ -88,7 +91,7 @@ public class DiceManager : MonoBehaviour
             resultDices += " " + valor + " + ";
         }
         resultDices += string.Format("({0})", Modificador);
-        resultDices = resultDices.Substring(1, resultDices.Length);
+        resultDices = resultDices.Substring(1, resultDices.Length - 1);
 
         ResultTotalText.text = string.Format("{0}", resultSum);
         ResultDicesText.text = string.Format("{0}", resultDices);
