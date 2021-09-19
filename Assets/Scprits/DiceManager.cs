@@ -88,10 +88,10 @@ public class DiceManager : MonoBehaviour
         foreach(int valor in bestRolls)
         {
             resultSum += valor;
-            resultDices += " " + valor + " + ";
+            resultDices += valor + " + ";
         }
         resultDices += string.Format("({0})", Modificador);
-        resultDices = resultDices.Substring(1, resultDices.Length - 1);
+        resultSum += int.Parse(Modificador);
 
         ResultTotalText.text = string.Format("{0}", resultSum);
         ResultDicesText.text = string.Format("{0}", resultDices);
