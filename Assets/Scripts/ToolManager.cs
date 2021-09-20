@@ -11,6 +11,8 @@ public class ToolManager : MonoBehaviour
     public GameObject DiceRollerTool;
     public GameObject ConversorTool;
 
+    public AudioClip ToolSound;
+
     public ToolState CurrentState
     {
         get => currentState;

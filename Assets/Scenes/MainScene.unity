@@ -3064,6 +3064,7 @@ MonoBehaviour:
   CoinImage: {fileID: 1661136277}
   DiceRollerTool: {fileID: 946245705}
   ConversorTool: {fileID: 1644336957}
+  ToolSound: {fileID: 8300000, guid: 4bfcf132bc202f14bb33c374fe6a7acd, type: 3}
 --- !u!4 &1419931378
 Transform:
   m_ObjectHideFlags: 0
@@ -3439,6 +3440,7 @@ MonoBehaviour:
   AddPlayerButton: {fileID: 0}
   ScrollContentGO: {fileID: 0}
   AddPlayerPrefab: {fileID: 0}
+  RollSound: {fileID: 0}
 --- !u!4 &1649674009
 Transform:
   m_ObjectHideFlags: 0

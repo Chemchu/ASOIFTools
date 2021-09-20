@@ -23,6 +23,8 @@ public class DiceManager : MonoBehaviour
     public GameObject ScrollContentGO;
     public GameObject AddPlayerPrefab;
 
+    public AudioClip RollSound;
+
     private bool CanRoll;
 
     // Start is called before the first frame update
