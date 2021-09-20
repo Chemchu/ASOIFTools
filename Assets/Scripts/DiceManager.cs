@@ -8,13 +8,20 @@ using TMPro;
 
 public class DiceManager : MonoBehaviour
 {
-    public string DiceNum = "0";
-    public string DiceBonif = "0";
-    public string Modificador = "0";
+    private string DiceNum = "0";
+    private string DiceBonif = "0";
+    private string Modificador = "0";
+
+    /*private IDictionary<string, int> PlayersTotalRollValue;
+    private IDictionary<string, string> PlayersRolls;*/
 
     public Image RollBtnImage;
     public TMP_Text ResultTotalText;
     public TMP_Text ResultDicesText;
+    public Button AddPlayerButton;
+
+    public GameObject ScrollContentGO;
+    public GameObject AddPlayerPrefab;
 
     private bool CanRoll;
 
@@ -27,6 +34,11 @@ public class DiceManager : MonoBehaviour
         DiceNum = "0";
         DiceBonif = "0";
         Modificador = "0";
+
+        /*PlayersRolls = new Dictionary<string, string>();
+        PlayersTotalRollValue = new Dictionary<string, int>();
+        PlayersRolls.Add("Default Player", "");
+        PlayersTotalRollValue.Add("Default Player", -99999);*/
     }
 
     private void Update()
@@ -70,6 +82,16 @@ public class DiceManager : MonoBehaviour
     public void RollDices()
     {
         if (!CanRoll) return;
+        RollDice();
+        /*foreach (string player in PlayersTotalRollValue.Keys)
+        {
+            RollDice();
+        }*/
+    }
+
+    private void RollDice()
+    {
+        //TODO: Hacer que cada jugador tenga su valor total y desglosado
 
         int totalRolls = int.Parse(DiceNum) + int.Parse(DiceBonif);
         int[] allRolls = new int[totalRolls];
@@ -85,7 +107,7 @@ public class DiceManager : MonoBehaviour
 
         int resultSum = 0;
         string resultDices = "";
-        foreach(int valor in bestRolls)
+        foreach (int valor in bestRolls)
         {
             resultSum += valor;
             resultDices += valor + " + ";
@@ -95,5 +117,10 @@ public class DiceManager : MonoBehaviour
 
         ResultTotalText.text = string.Format("{0}", resultSum);
         ResultDicesText.text = string.Format("{0}", resultDices);
+    }
+
+    public void AddPlayer()
+    {
+
     }
 }
