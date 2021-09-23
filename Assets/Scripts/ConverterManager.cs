@@ -86,9 +86,9 @@ public class ConverterManager : MonoBehaviour
         DivisaInicial = (Divisa)Enum.Parse(typeof(Divisa), dropdown.options[dropdown.value].text, true);
 
         DivisaInicialInputText.text = string.Format("{0}", ConvertDivisa(ValorDivisaInicial, DivisaFinal, DivisaInicial));
-
-        if (DivisaInicial == Divisa.GoldenDragon) DesglosarImage.color = new Color(DesglosarImage.color.r, DesglosarImage.color.g, DesglosarImage.color.b, 1f);
-        else DesglosarImage.color = new Color(DesglosarImage.color.r, DesglosarImage.color.g, DesglosarImage.color.b, 0f);
+        
+        /*if (DivisaInicial == Divisa.GoldenDragon) DesglosarImage.color = new Color(DesglosarImage.color.r, DesglosarImage.color.g, DesglosarImage.color.b, 255f);
+        else DesglosarImage.color = new Color(DesglosarImage.color.r, DesglosarImage.color.g, DesglosarImage.color.b, 0f);*/
     }
 
     private void DivisaFinalChanged(TMP_Dropdown dropdown)
@@ -123,16 +123,88 @@ public class ConverterManager : MonoBehaviour
 
     private void Desglosar()
     {
-        if (DivisaInicial == Divisa.CopperStar) return;
-        if (DivisaInicial == Divisa.SilverStag) return;
+        if (DivisaInicial == Divisa.CopperStar)
+        {
+            if (DivisaFinal == Divisa.CopperStar)
+            {
+                DesgloseResult.text = string.Format("{0} {1} son {2} {3}", ValorDivisaInicial, DivisaInicial.ToString(),
+                                                                                    ValorDivisaInicial, DivisaInicial.ToString());
+            }
+
+            if (DivisaFinal == Divisa.SilverStag)
+            {
+                var silverCoins = ConvertDivisa(ValorDivisaInicial, Divisa.CopperStar, Divisa.SilverStag);
+                var copperCoins = ConvertDivisa((float)(silverCoins - Math.Truncate(silverCoins)), Divisa.SilverStag, Divisa.CopperStar);
+
+                DesgloseResult.text = string.Format("{0} {1} son {2} {3} y {4} {5}", ValorDivisaInicial, DivisaInicial.ToString(),
+                                                                                    Mathf.Floor(silverCoins), DivisaFinal.ToString(),
+                                                                                    Math.Ceiling(copperCoins), DivisaInicial.ToString());
+            }
+
+            if (DivisaFinal == Divisa.GoldenDragon)
+            {
+                var goldenCoins = ConvertDivisa(ValorDivisaInicial, Divisa.CopperStar, Divisa.GoldenDragon);
+                var silverCoins = ConvertDivisa((float)(goldenCoins - Math.Truncate(goldenCoins)), Divisa.GoldenDragon, Divisa.SilverStag);
+                var copperCoins = ConvertDivisa((float)(silverCoins - Math.Truncate(silverCoins)), Divisa.SilverStag, Divisa.CopperStar);
+
+                DesgloseResult.text = string.Format("{0} {1} son {2} {3}, {4} {5} y {6} {7}", ValorDivisaInicial, DivisaInicial.ToString(),
+                                                                                    Mathf.Floor(goldenCoins), DivisaFinal.ToString(),
+                                                                                    Mathf.Floor(silverCoins), Divisa.SilverStag.ToString(),
+                                                                                    Math.Ceiling(copperCoins), DivisaInicial.ToString());
+            }
+        }
+
+        if (DivisaInicial == Divisa.SilverStag)
+        {
+            if (DivisaFinal == Divisa.CopperStar)
+            {
+                var copperCoins = ConvertDivisa((float)(ValorDivisaInicial), Divisa.SilverStag, Divisa.CopperStar);
+
+                DesgloseResult.text = string.Format("{0} {1} son {2} {3}", ValorDivisaInicial, DivisaInicial.ToString(),
+                                                                           Math.Ceiling(copperCoins), DivisaFinal.ToString());
+            }
+
+            if (DivisaFinal == Divisa.SilverStag)
+            {
+                DesgloseResult.text = string.Format("{0} {1} son {2} {3}", ValorDivisaInicial, DivisaInicial.ToString(),
+                                                                                    ValorDivisaInicial, DivisaInicial.ToString());
+            }
+
+            if (DivisaFinal == Divisa.GoldenDragon)
+            {
+                var goldenCoins = ConvertDivisa(ValorDivisaInicial, DivisaInicial, DivisaFinal);
+                var silverCoins = ConvertDivisa((float)(goldenCoins - Math.Truncate(goldenCoins)), DivisaFinal, DivisaInicial);
+
+                DesgloseResult.text = string.Format("{0} {1} son {2} {3} y {4} {5}", ValorDivisaInicial, DivisaInicial.ToString(),
+                                                                                    Mathf.Floor(goldenCoins), DivisaFinal.ToString(),
+                                                                                    Mathf.Floor(silverCoins), Divisa.SilverStag.ToString());
+            }
+        }
+
 
         if (DivisaInicial == Divisa.GoldenDragon)
         {
-            var silverCoins = ConvertDivisa(ValorDivisaInicial, Divisa.GoldenDragon, Divisa.SilverStag);
-            var copperCoins = ConvertDivisa((float)(silverCoins - Math.Truncate(silverCoins)), Divisa.SilverStag, Divisa.CopperStar);
-            DesgloseResult.text = string.Format("{0} {1} son {2} {3} y {4} {5}", ValorDivisaInicial, Divisa.GoldenDragon.ToString(), 
-                                                                                Mathf.Floor(silverCoins), Divisa.SilverStag.ToString(),
-                                                                                Mathf.Ceil(copperCoins), Divisa.CopperStar.ToString());
+            if (DivisaFinal == Divisa.CopperStar)
+            {
+                var copperCoins = ConvertDivisa((float)(ValorDivisaInicial), Divisa.SilverStag, Divisa.CopperStar);
+
+                DesgloseResult.text = string.Format("{0} {1} son {2} {3}", ValorDivisaInicial, DivisaInicial.ToString(),
+                                                                           Math.Ceiling(copperCoins), DivisaFinal.ToString());
+            }
+
+            if (DivisaFinal == Divisa.SilverStag)
+            {
+                var silverCoins = ConvertDivisa(ValorDivisaInicial, DivisaInicial, DivisaFinal);
+
+                DesgloseResult.text = string.Format("{0} {1} son {2} {3}", ValorDivisaInicial, DivisaInicial.ToString(),
+                                                                                    Mathf.Floor(silverCoins), DivisaFinal.ToString());
+            }
+
+            if (DivisaFinal == Divisa.GoldenDragon)
+            {
+                DesgloseResult.text = string.Format("{0} {1} son {2} {3}", ValorDivisaInicial, DivisaInicial.ToString(),
+                                                                                    ValorDivisaInicial, DivisaInicial.ToString());
+            }
         }
     }
 }
