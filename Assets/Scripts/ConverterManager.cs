@@ -15,6 +15,12 @@ public class ConverterManager : MonoBehaviour
     private Divisa DivisaInicial = Divisa.CopperStar;
     private Divisa DivisaFinal = Divisa.CopperStar;
 
+    private bool IsDivisaInicialSeleccionada;
+    private bool IsDivisaFinalSeleccionada;
+
+    private float ValorDivisaInicial;
+    private float ValorDivisaFinal;
+
     public enum Divisa
     {
         CopperStar,
@@ -28,38 +34,58 @@ public class ConverterManager : MonoBehaviour
         DivisaFinalInputText.text = "0";
 
         DivisaInicialInputText.onValueChanged.AddListener(delegate { ValorDivisaInicialChanged(DivisaInicialInputText); });
+        DivisaInicialInputText.onSelect.AddListener(delegate { DivisaInicialSeleccionada(DivisaInicialInputText); });
+
         DivisaFinalInputText.onValueChanged.AddListener(delegate { ValorDivisaFinalChanged(DivisaFinalInputText); });
+        DivisaFinalInputText.onSelect.AddListener(delegate { DivisaFinalSeleccionada(DivisaFinalInputText); });
 
         DivisaInicialDropdown.onValueChanged.AddListener(delegate { DivisaInicialChanged(DivisaInicialDropdown); });
         DivisaFinalDropdown.onValueChanged.AddListener(delegate { DivisaFinalChanged(DivisaFinalDropdown); });
     }
+    private void DivisaInicialSeleccionada(TMP_InputField fieldChanged)
+    {
+        IsDivisaInicialSeleccionada = true;
+        IsDivisaFinalSeleccionada = false;
+    }
+
+    private void DivisaFinalSeleccionada(TMP_InputField fieldChanged)
+    {
+        IsDivisaInicialSeleccionada = false;
+        IsDivisaFinalSeleccionada = true;
+    }
 
     private void ValorDivisaInicialChanged(TMP_InputField fieldChanged)
     {
-        float value;
-        if (fieldChanged.text == "") value = 0;
-        else value = int.Parse(fieldChanged.text);
+        if (!IsDivisaInicialSeleccionada) return;
 
-        DivisaFinalInputText.text = string.Format("{0}", ConvertDivisa(value, DivisaInicial, DivisaFinal));
-    }
+        if (fieldChanged.text == "") ValorDivisaInicial = 0;
+        else ValorDivisaInicial = int.Parse(fieldChanged.text);
+
+        DivisaFinalInputText.text = string.Format("{0}", ConvertDivisa(ValorDivisaInicial, DivisaInicial, DivisaFinal));
+    }   
 
     private void ValorDivisaFinalChanged(TMP_InputField fieldChanged)
     {
-        float value;
-        if (fieldChanged.text == "") value = 0;
-        else value = int.Parse(fieldChanged.text);
+        if (!IsDivisaFinalSeleccionada) return;
 
-        DivisaInicialInputText.text = string.Format("{0}", ConvertDivisa(value, DivisaInicial, DivisaFinal));
+        if (fieldChanged.text == "") ValorDivisaFinal = 0;
+        else ValorDivisaFinal = int.Parse(fieldChanged.text);
+
+        DivisaInicialInputText.text = string.Format("{0}", ConvertDivisa(ValorDivisaFinal, DivisaFinal, DivisaInicial));
     }
 
     private void DivisaInicialChanged(TMP_Dropdown dropdown)
     {
         DivisaInicial = (Divisa)Enum.Parse(typeof(Divisa), dropdown.options[dropdown.value].text, true);
+
+        DivisaInicialInputText.text = string.Format("{0}", ConvertDivisa(ValorDivisaInicial, DivisaFinal, DivisaInicial));
     }
 
     private void DivisaFinalChanged(TMP_Dropdown dropdown)
     {
         DivisaFinal = (Divisa)Enum.Parse(typeof(Divisa), dropdown.options[dropdown.value].text, true);
+
+        DivisaFinalInputText.text = string.Format("{0}", ConvertDivisa(ValorDivisaInicial, DivisaInicial, DivisaFinal));
     }
 
     private float ConvertDivisa(float valorInicial, Divisa monedaInicial, Divisa monedaFinal)
