@@ -38,6 +38,9 @@ public class ConverterManager : MonoBehaviour
         DivisaInicialInputText.text = "0";
         DivisaFinalInputText.text = "0";
 
+        ValorDivisaInicial = 0;
+        ValorDivisaFinal = 0;
+
         DivisaInicialInputText.onValueChanged.AddListener(delegate { ValorDivisaInicialChanged(DivisaInicialInputText); });
         DivisaInicialInputText.onSelect.AddListener(delegate { DivisaInicialSeleccionada(DivisaInicialInputText); });
 
@@ -68,7 +71,8 @@ public class ConverterManager : MonoBehaviour
         if (fieldChanged.text == "") ValorDivisaInicial = 0;
         else ValorDivisaInicial = int.Parse(fieldChanged.text);
 
-        DivisaFinalInputText.text = string.Format("{0}", ConvertDivisa(ValorDivisaInicial, DivisaInicial, DivisaFinal));
+        ValorDivisaFinal = ConvertDivisa(ValorDivisaInicial, DivisaInicial, DivisaFinal);
+        DivisaFinalInputText.text = string.Format("{0}", ValorDivisaFinal);
     }   
 
     private void ValorDivisaFinalChanged(TMP_InputField fieldChanged)
@@ -78,7 +82,8 @@ public class ConverterManager : MonoBehaviour
         if (fieldChanged.text == "") ValorDivisaFinal = 0;
         else ValorDivisaFinal = int.Parse(fieldChanged.text);
 
-        DivisaInicialInputText.text = string.Format("{0}", ConvertDivisa(ValorDivisaFinal, DivisaFinal, DivisaInicial));
+        ValorDivisaInicial = ConvertDivisa(ValorDivisaFinal, DivisaFinal, DivisaInicial);
+        DivisaInicialInputText.text = string.Format("{0}", ValorDivisaInicial);
     }
 
     private void DivisaInicialChanged(TMP_Dropdown dropdown)
@@ -86,6 +91,12 @@ public class ConverterManager : MonoBehaviour
         DivisaInicial = (Divisa)Enum.Parse(typeof(Divisa), dropdown.options[dropdown.value].text, true);
 
         DivisaFinalInputText.text = string.Format("{0}", ConvertDivisa(ValorDivisaInicial, DivisaInicial, DivisaFinal));
+
+        if (DivisaInicialInputText.text == "") ValorDivisaInicial = 0;
+        else ValorDivisaInicial = int.Parse(DivisaInicialInputText.text);
+
+        if (DivisaFinalInputText.text == "") ValorDivisaFinal = 0;
+        else ValorDivisaFinal = int.Parse(DivisaFinalInputText.text);
     }
 
     private void DivisaFinalChanged(TMP_Dropdown dropdown)
@@ -93,6 +104,12 @@ public class ConverterManager : MonoBehaviour
         DivisaFinal = (Divisa)Enum.Parse(typeof(Divisa), dropdown.options[dropdown.value].text, true);
 
         DivisaInicialInputText.text = string.Format("{0}", ConvertDivisa(ValorDivisaFinal, DivisaFinal, DivisaInicial));
+
+        if (DivisaInicialInputText.text == "") ValorDivisaInicial = 0;
+        else ValorDivisaInicial = int.Parse(DivisaInicialInputText.text);
+
+        if (DivisaFinalInputText.text == "") ValorDivisaFinal = 0;
+        else ValorDivisaFinal = int.Parse(DivisaFinalInputText.text);
     }
 
     private float ConvertDivisa(float valorInicial, Divisa monedaInicial, Divisa monedaFinal)
