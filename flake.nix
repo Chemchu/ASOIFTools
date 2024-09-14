@@ -10,7 +10,6 @@
       let
         overlays = [ (import rust-overlay) ];
         pkgs = import nixpkgs { inherit system overlays; config.allowUnfree = true; config.android_sdk.accept_license = true; };
-        androidSdk = (pkgs.android-studio.withSdk (pkgs.androidenv.composeAndroidPackages { includeNDK = true; }).androidsdk);
         androidComposition = (pkgs.androidenv.composeAndroidPackages { includeNDK = true; });
       in {
         devShells.default = pkgs.mkShell {
