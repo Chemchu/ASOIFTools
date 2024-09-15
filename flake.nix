@@ -40,7 +40,7 @@
           # Use platform-tools as a base for ANDROID_HOME
           shellHook = ''
             export ANDROID_HOME=${androidComposition.androidsdk}/libexec/android-sdk
-            export NDK_HOME=$ANDROID_HOME/ndk-bundle
+            export NDK_HOME=$(ls -d $ANDROID_HOME/ndk/* | head -n 1)
           '';
         };
       }
