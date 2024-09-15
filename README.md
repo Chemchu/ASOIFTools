@@ -1,11 +1,19 @@
-# Notes from the author of this repo
-This project is in a kinda of stale/stopped state right now. The issue is that Tauri v2 is not stable yet. There's little to no documentation for android/ios development for Nix.
-When things change, I'll continue the development. By now, I just gonna do a web app.
+# dice_roller app
+So, this is the Bun version using Elysia. The idea is to create a basic dice roller app and serve it on Flyio
+The cool part is to also serve it as a PWA and allow users to download it and use it offline.
 
-# Tauri + Vanilla TS
+# Elysia with Bun runtime
 
-This template should help get you started developing with Tauri in vanilla HTML, CSS and Typescript.
+## Getting Started
+To get started with this template, simply paste this command into your terminal:
+```bash
+bun create elysia ./elysia-example
+```
 
-## Recommended IDE Setup
+## Development
+To start the development server run:
+```bash
+bun run dev
+```
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+Open http://localhost:3000/ with your browser to see the result.
