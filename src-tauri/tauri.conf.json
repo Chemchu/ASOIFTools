@@ -1,7 +1,7 @@
 {
   "productName": "dice_roller",
   "version": "0.1.0",
-  "identifier": "com.dice_roller.app",
+  "identifier": "com.dice-roller.app",
   "build": {
     "beforeDevCommand": "bun run dev",
     "devUrl": "http://localhost:1420",

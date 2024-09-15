@@ -33,6 +33,10 @@
             pkgs.systemdLibs
           ];
 
+          packages = [
+            pkgs.rustup
+          ];
+
           # Use platform-tools as a base for ANDROID_HOME
           shellHook = ''
             export ANDROID_HOME=${androidComposition.androidsdk}/libexec/android-sdk
