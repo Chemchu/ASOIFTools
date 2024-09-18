@@ -1,10 +1,18 @@
 import { Elysia } from "elysia";
 import { html } from "@elysiajs/html";
 import landing_page from "./services/landing_page";
+import { Logger } from "./util/logger";
+import { htmlWrapper } from "./util/htmlWrapper";
 
 const app = new Elysia()
-    .use(html({ autoDetect: true }))
-    .get("/", landing_page)
+    .decorate("logger", Logger)
+    .decorate("baseHtml", htmlWrapper)
+    .onRequest((req) => {
+        const endpoint = `${req.request.method} ${req.request.url}`;
+        req.logger(endpoint);
+    })
+    .use(html())
+    .get("/", ({baseHtml}) => baseHtml(landing_page()))
     .listen(3000);
 
 console.log(
