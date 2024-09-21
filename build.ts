@@ -1,13 +1,13 @@
-console.log(`#### Building... ####`);
+import { exec } from 'child_process';
 
-console.log(`#### Compiling TailwindCSS... ####`);
-// TODO: Compile TailwindCSS
+console.log(`Building...`);
 
-// Create promise and wait 5 seconds
-// This is just to simulate a build process
-const build = new Promise((resolve) => {
-  setTimeout(() => {
-    console.log(`#### Build Complete ####`);
-    resolve(true);
-  }, 1000);
+console.log(`Compiling TailwindCSS...`);
+
+exec('npx tailwindcss -i ./src/input.css -o ./public/output.css', (error, stdout) => {
+    if (error) console.error(`Error: ${error.message}`);
+    if (stdout) console.log(`Stdout: ${stdout}`);
 });
+
+console.log(`Build completed`);
+
