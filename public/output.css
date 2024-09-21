@@ -636,6 +636,10 @@ video {
   max-width: 42rem;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -732,6 +736,11 @@ video {
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.text-9xl {
+  font-size: 8rem;
+  line-height: 1;
 }
 
 .text-lg {
