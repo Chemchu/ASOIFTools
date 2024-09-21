@@ -3,12 +3,12 @@ import { html } from "@elysiajs/html";
 import { staticPlugin } from "@elysiajs/static";
 import landing_page from "./services/landing_page";
 import { Logger } from "./util/logger";
-import { htmlWrapper } from "./util/htmlWrapper";
+import { baseHtml } from "./util/baseHtml";
 
 const app = new Elysia()
     .use(staticPlugin())
     .decorate("logger", Logger)
-    .decorate("baseHtml", htmlWrapper)
+    .decorate("baseHtml", baseHtml)
     .onRequest((req) => {
         const endpoint = `${req.request.method} ${req.request.url}`;
         req.logger(endpoint);
