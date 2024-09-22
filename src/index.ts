@@ -1,7 +1,7 @@
 import { Elysia } from "elysia";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from "@elysiajs/static";
-import landing_page from "./services/landing_page";
+import dicePage from "./services/dicePage";
 import { Logger } from "./util/logger";
 import { baseHtml } from "./util/baseHtml";
 
@@ -13,7 +13,7 @@ const app = new Elysia()
         req.logger(req.request.method, req.request.url);
     })
     .use(html())
-    .get("/", ({ baseHtml }) => baseHtml(landing_page()))
+    .get("/", ({ baseHtml }) => baseHtml(dicePage()))
     .listen(3000);
 
 console.log(

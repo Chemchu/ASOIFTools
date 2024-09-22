@@ -19,7 +19,7 @@ const baseHtml = (innerContent: JSX.Element) => {
 
                 <link rel="manifest" href="/public/pwa/manifest.json" />
             </head>
-            <body x-data>
+            <body>
                 {innerContent}
             </body>
         </html>
