@@ -10,13 +10,12 @@ const app = new Elysia()
     .decorate("logger", Logger)
     .decorate("baseHtml", baseHtml)
     .onRequest((req) => {
-        const endpoint = `${req.request.method} ${req.request.url}`;
-        req.logger(endpoint);
+        req.logger(req.request.method, req.request.url);
     })
     .use(html())
     .get("/", ({ baseHtml }) => baseHtml(landing_page()))
     .listen(3000);
 
 console.log(
-    `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`,
+    `🦊 \x1b[32mElysia is running at ${app.server?.hostname}:${app.server?.port}\x1b[0m`,
 );
