@@ -4,6 +4,7 @@ import { staticPlugin } from "@elysiajs/static";
 import dicePage from "./services/dicePage";
 import { Logger } from "./util/logger";
 import { baseHtml } from "./util/baseHtml";
+import converterPage from "./services/converterPage";
 
 const app = new Elysia()
     .use(staticPlugin())
@@ -13,7 +14,8 @@ const app = new Elysia()
         req.logger(req.request.method, req.request.url);
     })
     .use(html())
-    .get("/", ({ baseHtml }) => baseHtml(dicePage()))
+    .get("/dados", ({ baseHtml }) => baseHtml(dicePage()))
+    .get("/conversor", ({ baseHtml }) => baseHtml(converterPage()))
     .listen(3000);
 
 console.log(
