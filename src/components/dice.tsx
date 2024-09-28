@@ -12,7 +12,7 @@ const Dice = (props: { faces: number }) => {
                     <div class="w-full h-full flex flex-col justify-center items-center">
                         <div class="flex w-full h-1/6 text-4xl sm:text-3xl text-gray-900 items-center justify-end pr-2">
 
-                            <div class="cursor-pointer rounded-full bg-orange-500 p-1"
+                            <div class="cursor-pointer rounded-lg bg-orange-500 p-1"
                                 x-bind:class="rollValue > 0 && diceCount > 0 ? 'visible' : 'invisible'"
                                 x-on:click={`() => { diceCount = 0; rollValue = 0;  }`}
                             >
