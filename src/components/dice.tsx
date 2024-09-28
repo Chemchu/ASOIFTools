@@ -10,23 +10,25 @@ const Dice = (props: { faces: number }) => {
             <div class="relative">
                 <div class="relative h-72 w-full overflow-hidden rounded-lg bg-white text-gray-900">
                     <div class="w-full h-full flex flex-col gap-4 justify-center items-center">
-                        <div class="w-full h-3/4 flex gap-4 justify-center items-center">
+                        <div class="w-full h-full flex gap-4 justify-center items-end">
                             <button x-on:click="() => diceCount == 0 ? 0 : diceCount--">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" class="size-12">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" class="size-12 sm:size-10">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                                 </svg>
                             </button>
-                            <span class="text-4xl flex justify-center items-center cursor-pointer"
+                            <span class="text-6xl sm:text-4xl flex justify-center items-center cursor-pointer"
                                 x-on:click="() => { if(diceCount <= 0) diceCount++ }">
                                     <span x-show="diceCount > 0" x-text="diceCount"/>
-                                D{props.faces}</span>
+                                D{props.faces}
+                            </span>
                             <button x-on:click="() => diceCount++">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" class="size-12">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" class="size-12 sm:size-10">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                                 </svg>
                             </button>
                         </div>
-                        <span class="flex text-gray-900 text-3xl w-full h-1/4 justify-center items-center" x-cloak x-show="rollValue > 0 && diceCount > 0" x-text="rollValue" />
+                        <span class="flex w-full h-full text-gray-900 text-4xl sm:text-3xl justify-center items-center "
+                            x-bind:class="rollValue > 0 && diceCount > 0 ? 'visible' : 'invisible'" x-text="rollValue" />
                     </div>
                 </div>
             </div>
