@@ -1,10 +1,11 @@
 import { Elysia } from "elysia";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from "@elysiajs/static";
-import dicePage from "./services/dicePage";
+import dicePage from "./pages/dicePage";
 import { Logger } from "./util/logger";
 import { baseHtml } from "./util/baseHtml";
-import converterPage from "./services/converterPage";
+import converterPage from "./pages/converterPage";
+import notFound from "./pages/notFoundPage";
 
 const app = new Elysia()
     .use(staticPlugin())
@@ -16,6 +17,11 @@ const app = new Elysia()
     .use(html())
     .get("/dados", ({ baseHtml }) => baseHtml(dicePage()))
     .get("/conversor", ({ baseHtml }) => baseHtml(converterPage()))
+    .onError(({ code }) => {
+        if (code === "NOT_FOUND") {
+            return baseHtml(notFound());
+        }
+    })
     .listen(3000);
 
 console.log(

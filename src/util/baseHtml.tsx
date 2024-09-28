@@ -1,9 +1,8 @@
 import { Html } from '@elysiajs/html'
-import Navbar, { NavItems } from '../components/navbar';
 
 const baseHtml = (innerContent: JSX.Element) => {
     return (
-        <html lang="es">
+        <html lang="es" class="h-full w-full">
             <head>
                 <meta charset="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,8 +19,7 @@ const baseHtml = (innerContent: JSX.Element) => {
 
                 <link rel="manifest" href="/public/pwa/manifest.json" />
             </head>
-            <body class="bg-neutral-900 w-full h-full">
-                <Navbar currentNav={NavItems.Dados} />
+            <body class="bg-gray-100 w-full h-full">
                 {innerContent}
             </body>
         </html>
