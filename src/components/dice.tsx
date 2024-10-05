@@ -1,4 +1,5 @@
 import { Html } from '@elysiajs/html'
+import DiceDetailModal from './diceDetailModal';
 
 const Dice = (props: { faces: number }) => {
     return (
@@ -7,6 +8,7 @@ const Dice = (props: { faces: number }) => {
             <audio x-ref={`diceAudioD${props.faces}`}>
                 <source src="https://cdn.freesound.org/previews/575/575087_1417188-lq.mp3" type="audio/mpeg" />
             </audio>
+            <DiceDetailModal />
             <div class="relative">
                 <div class="relative h-72 w-full overflow-hidden border rounded-lg bg-white text-gray-900 shadow-lg">
                     <div class="w-full h-full flex flex-col justify-center items-center">
