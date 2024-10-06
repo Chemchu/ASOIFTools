@@ -6,6 +6,7 @@ import { Logger } from "./util/logger";
 import { baseHtml } from "./util/baseHtml";
 import converterPage from "./pages/converterPage";
 import notFound from "./pages/notFoundPage";
+import landingPage from "./pages/landingPage";
 
 const app = new Elysia()
     .use(staticPlugin())
@@ -15,6 +16,7 @@ const app = new Elysia()
         req.logger(req.request.method, req.request.url);
     })
     .use(html())
+    .get("/", ({ baseHtml }) => baseHtml(landingPage()))
     .get("/dados", ({ baseHtml }) => baseHtml(dicePage()))
     .get("/conversor", ({ baseHtml }) => baseHtml(converterPage()))
     .onError(({ code }) => {

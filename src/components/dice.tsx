@@ -4,7 +4,6 @@ import DiceDetailModal from './diceDetailModal';
 const Dice = (props: { faces: number }) => {
     return (
         <div>
-            <DiceDetailModal />
             <div x-data="{ diceCount: 0, rollValue: 0,
                 roll(nDices, faces) { if(nDices <= 0) { return 0;} return this.roll(nDices - 1, faces) + (Math.floor((Math.random() * faces)) + 1) } }">
                 <audio x-ref={`diceAudioD${props.faces}`}>
@@ -62,6 +61,7 @@ const Dice = (props: { faces: number }) => {
                             </svg>
                         <span class="sr-only">Lanzar</span>
                     </div>
+                    <DiceDetailModal />
                 </div>
             </div >
         </div>
