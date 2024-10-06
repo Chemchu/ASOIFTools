@@ -44,7 +44,7 @@ const DiceDetailModal = () => {
                     <button
                       type="button"
                       x-on:click="open = false"
-                      class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      class="inline-flex w-full justify-center rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       Go back to dashboard
                     </button>
@@ -56,7 +56,7 @@ const DiceDetailModal = () => {
 
           <button
             x-on:click="open = true"
-            class="px-4 py-2 bg-red-500 text-white rounded cursor-pointer"
+            class="w-full h-full text-white cursor-pointer relative flex items-center justify-center rounded-md border border-transparent bg-orange-600 hover:bg-orange-500 px-8 py-2 text-sm font-medium"
           >
             Tiradas especiales
           </button>
